@@ -32,14 +32,7 @@ class Solution {
             for(int k=0;k<N;k++){
                 for(int q=0;q<M;q++){
                     if(visit[k][q][i])continue;
-                        visit[k][q][i]=true;
-                       int Y=k+diy[i];
-                       int X=q+dix[i];
-                       if(Y<0)Y=N-1;
-                       if(Y==N)Y=0;
-                       if(X<0)X=M-1;
-                       if(X==M)X=0;
-                        DFS(1,grid,Y,X,i); 
+                    Light(0,grid,k,q,i); 
                 }
             }
            
@@ -52,29 +45,25 @@ class Solution {
         }
         return ret;
     }
-    public static void DFS(int len, String[] grid, int y, int x, int dir) {
-    while (true) {
-        int Ndir = map.get(grid[y].charAt(x)).get(dir);
+    public static void Light(int len, String[] grid, int y, int x, int dir) {
+        while (true) {
+            if (visit[y][x][dir]) {
+                ans.add(len);
+                return;
+            }
+            visit[y][x][dir] = true;
+            int Y = y + diy[dir];
+            int X = x + dix[dir];
 
-        if (visit[y][x][Ndir]) {
-            ans.add(len);
-            return;
+            if (Y < 0) Y = N - 1;
+            if (Y == N) Y = 0;
+            if (X < 0) X = M - 1;
+            if (X == M) X = 0;
+            
+            dir = map.get(grid[Y].charAt(X)).get(dir);    
+            y = Y;
+            x = X;
+            len++;
         }
-
-        visit[y][x][Ndir] = true;
-
-        int Y = y + diy[Ndir];
-        int X = x + dix[Ndir];
-
-        if (Y < 0) Y = N - 1;
-        if (Y == N) Y = 0;
-        if (X < 0) X = M - 1;
-        if (X == M) X = 0;
-
-        y = Y;
-        x = X;
-        dir = Ndir;
-        len++;
     }
-}
 }
