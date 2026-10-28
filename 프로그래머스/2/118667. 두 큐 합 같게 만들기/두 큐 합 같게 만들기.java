@@ -21,8 +21,7 @@ class Solution {
 
         int ans=0;
         int len=N+M;
-        boolean O=false;
-        boolean T=false;
+
         while(ans<len*3){
             if(sum1<sum2){
                 sum1+=arr[two];
@@ -35,8 +34,7 @@ class Solution {
             }else{
                 break;
             }
-            if(one>=len) O=true;
-            if(two==N)T=true;
+
             
             one%=len;
             two%=len;
